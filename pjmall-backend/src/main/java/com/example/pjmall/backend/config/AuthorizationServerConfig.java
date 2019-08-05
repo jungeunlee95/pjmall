@@ -26,7 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		
-		// password or authorization code
+// password or authorization code
 //		clients.inMemory() 
 //			.withClient("pjmall")
 //			.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
@@ -35,7 +35,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //			.resourceIds("sparklr")
 //			.accessTokenValiditySeconds(60);
 
+		
 		// client credentials
+		/*
+		 INSERT
+		   INTO OAUTH_CLIENT_DETAILS (
+				CLIENT_ID,
+				RESOURCE_IDS,
+				CLIENT_SECRET,
+				SCOPE,
+				AUTHORIZED_GRANT_TYPES,
+				WEB_SERVER_REDIRECT_URI,
+				AUTHORITIES,
+				ACCESS_TOKEN_VALIDITY,
+				REFRESH_TOKEN_VALIDITY,
+				ADDITIONAL_INFORMATION,
+				AUTOAPPROVE )
+		VALUES ('pjmall', 'pjmall_api', '1234', 'read, write, trust', 'password, client_credentials', '', 'ROLE_CLIENT', null, null, '{}', '');
+		*/
 		clients.inMemory() 
 			.withClient("pjmall")
 			.authorizedGrantTypes("password", "client_credentials")
@@ -45,13 +62,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.secret("1234");
 			//.accessTokenValiditySeconds(60);
 		
-		
-		
 //		clients
 //			.jdbc(dataSource());
-//			.and()
-//			.withClient("my-client-with-registered-redirect")
-//			.authorizedGrantTypes("authorization_code") .authorities("ROLE_CLIENT") .scopes("read", "trust") .resourceIds("sparklr") .redirectUris("http://localhost:8080") .and() .withClient("my-client-with-secret") .authorizedGrantTypes("client_credentials", "password") .authorities("ROLE_CLIENT") .scopes("read") .resourceIds("sparklr") .secret("secret");
 	}
 	
     @Override
@@ -67,5 +79,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public DataSource dataSource() throws SQLException {
         return new BasicDataSource();
     }
-    
 }
