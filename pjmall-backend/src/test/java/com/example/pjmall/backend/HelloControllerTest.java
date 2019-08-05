@@ -54,7 +54,6 @@ public class HelloControllerTest {
         }
         
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        
 //        params.add("grant_type", "password");
 //        params.add("username", "test");
 //        params.add("password", "5678");

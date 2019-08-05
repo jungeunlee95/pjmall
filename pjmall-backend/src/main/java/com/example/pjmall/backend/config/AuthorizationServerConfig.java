@@ -28,7 +28,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		
 		// password or authorization code
 //		clients.inMemory() 
-//			.withClient("pjmall")
+//			.withClient("pjmall2")
 //			.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
 //			.authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
 //			.scopes("read", "write", "trust")
@@ -45,13 +45,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.secret("1234");
 			//.accessTokenValiditySeconds(60);
 		
-		
-		
 //		clients
 //			.jdbc(dataSource());
-//			.and()
-//			.withClient("my-client-with-registered-redirect")
-//			.authorizedGrantTypes("authorization_code") .authorities("ROLE_CLIENT") .scopes("read", "trust") .resourceIds("sparklr") .redirectUris("http://localhost:8080") .and() .withClient("my-client-with-secret") .authorizedGrantTypes("client_credentials", "password") .authorities("ROLE_CLIENT") .scopes("read") .resourceIds("sparklr") .secret("secret");
 	}
 	
     @Override
