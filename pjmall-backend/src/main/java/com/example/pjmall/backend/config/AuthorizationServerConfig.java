@@ -51,19 +51,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				REFRESH_TOKEN_VALIDITY,
 				ADDITIONAL_INFORMATION,
 				AUTOAPPROVE )
-		VALUES ('pjmall', 'pjmall_api', '1234', 'read, write, trust', 'password, client_credentials', '', 'ROLE_CLIENT', null, null, '{}', '');
+		VALUES ('pjmall', 'pjmall_api', '1234', 'read,write,trust', 'password,client_credentials', '', 'ROLE_CLIENT', null, null, '{}', '');
 		*/
-		clients.inMemory() 
-			.withClient("pjmall")
-			.authorizedGrantTypes("password", "client_credentials")
-			.authorities("ROLE_CLIENT")
-			.scopes("read", "write", "trust")
-			.resourceIds("pjmall_api")
-			.secret("1234");
+//		clients.inMemory() 
+//			.withClient("pjmall")
+//			.authorizedGrantTypes("password", "client_credentials")
+//			.authorities("ROLE_CLIENT")
+//			.scopes("read", "write", "trust")
+//			.resourceIds("pjmall_api")
+//			.secret("1234");
 			//.accessTokenValiditySeconds(60);
 		
-//		clients
-//			.jdbc(dataSource());
+		clients
+			.jdbc(dataSource());
 	}
 	
     @Override
