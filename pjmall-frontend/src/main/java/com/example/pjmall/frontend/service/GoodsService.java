@@ -15,14 +15,24 @@ public class GoodsService {
 	@Autowired
 	private OAuth2RestTemplate restTemplate;
 
-	
-	public List<Goods> getList(){
-		
+	public Goods getList(Long no){
 		String endpoint = "http://localhost:8888/v1/hello";
-		JSONResult jsonResult = restTemplate.getForObject(endpoint, JSONResult.class);
+		JSONResultGoods jsonResult = restTemplate.getForObject(endpoint, JSONResultGoods.class);
+		return jsonResult.getData();
+	}
 
+	
+	public String getList(){
+		String endpoint = "http://localhost:8888/v1/hello";
+		JSONResultGoodsList jsonResult = restTemplate.getForObject(endpoint, JSONResultGoodsList.class);
 		System.out.println( jsonResult );
-		
-		return null;
+		return jsonResult.getData();
+	}
+	
+	// DTO Class
+	private static class JSONResultGoods extends JSONResult<Goods> {
+	}
+	
+	private static class JSONResultGoodsList extends JSONResult<String> {
 	}
 }
