@@ -43,6 +43,7 @@
 
 	<modules>
 		<module>pjmall-backend</module>
+		<module>pjmall-backend3</module>
 		<module>pjmall-frontend</module>
 	</modules>
 

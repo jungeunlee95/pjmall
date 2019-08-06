@@ -5,18 +5,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JacksonJsonParser;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -25,16 +27,17 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.example.pjmall.backend.config.AppConfig;
+import com.example.pjmall.backend.config.WebConfig;
 import com.example.pjmall.backend.domain.User;
 import com.google.gson.Gson;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes={AppConfig.class, WebConfig.class})
+@WebAppConfiguration
 public class HelloControllerTest {
     
-	@Autowired
-    MockMvc mockMvc;
+	private MockMvc mockMvc;
 	
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -69,19 +72,19 @@ public class HelloControllerTest {
         params.add("grant_type", "client_credentials");
         params.add("scope", "read");
         params.add("scope", "write");
+
         ResultActions result = mockMvc
-        						.perform( post("/oauth/token")
-            					.params(params)
-            					.header("Authorization", "Basic " + new String(Base64.encode(("pjmall:1234").getBytes())))
-            					.accept("application/json; charset=UTF-8")
-            					.contentType(MediaType.APPLICATION_JSON))
-        						.andDo(print())
-        						.andExpect(status().isOk());            	
+            	.perform( post("/oauth/token")
+            				.params(params)
+                    		.header("Authorization", "Basic " + new String(Base64.encode(("pjmall:1234").getBytes())))
+                            .accept("application/json; charset=UTF-8")
+                            .contentType(MediaType.APPLICATION_JSON))
+    			.andDo(print())
+    			.andExpect(status().isOk());            	
 
         String resultString = result.andReturn().getResponse().getContentAsString();
-
-        JacksonJsonParser jsonParser = new JacksonJsonParser();
-        accessToken = jsonParser.parseMap(resultString).get("access_toke" + "n").toString();
+        Map<String, Object> jsonMap = new Gson().fromJson(resultString, HashMap.class);
+        accessToken = jsonMap.get("access_token").toString();
     }    
 	
 	@Test

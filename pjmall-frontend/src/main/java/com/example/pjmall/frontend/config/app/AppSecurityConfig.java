@@ -82,9 +82,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         	.csrf()
         		.disable();
-        
-        //.and()
-        //.addFilterBefore(cafe24AuthenticationProcessingFilter(), BasicAuthenticationFilter.class);
 	}
 
 	// 사용자 세부 서비스를 설정
