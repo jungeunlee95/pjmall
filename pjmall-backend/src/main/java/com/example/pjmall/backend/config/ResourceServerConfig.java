@@ -25,6 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(ResourceServerSecurityConfigurer securityConfigure) throws Exception {
 		securityConfigure.resourceId("pjmall_api");
+		//securityConfigure.tokenServices(tokenServices)
 	}
 	
 	
