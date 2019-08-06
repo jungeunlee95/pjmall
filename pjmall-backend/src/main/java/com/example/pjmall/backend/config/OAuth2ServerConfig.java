@@ -31,12 +31,11 @@ public class OAuth2ServerConfig {
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
 			http.headers().frameOptions().disable();
+
 			// 자원서버 접근 권한 설정
 			http
 				.authorizeRequests()
-				.antMatchers("/hello").access("#oauth2.hasScope('read')")
-				.antMatchers("/hello2").access("#oauth2.hasScope('read')")
-				.anyRequest().permitAll();
+				.anyRequest().access("#oauth2.hasScope('read,write')");
 		}
 
 		@Override
