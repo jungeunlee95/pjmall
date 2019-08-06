@@ -15,6 +15,11 @@ public class GoodsController {
 	@Autowired
 	private GoodsService goodsService;
 	
+	@RequestMapping("{no}")
+	public String list(@PathVariable("no") Long no) {
+		return "goods/item";
+	}
+	
 	@ResponseBody
 	@RequestMapping("/list/{page}")
 	public String list(@PathVariable("page") Integer page) {
