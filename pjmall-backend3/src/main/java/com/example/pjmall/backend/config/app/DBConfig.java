@@ -21,20 +21,21 @@ public class DBConfig {
 	private Environment env;
 	
 	@Bean
-	public DataSource basicDataSource() {
-		BasicDataSource basicDataSource = new BasicDataSource();
-		basicDataSource.setDriverClassName(env.getProperty("jdbc.diriverClassName"));
-		basicDataSource.setUrl(env.getProperty("jdbc.url"));
-		basicDataSource.setUsername(env.getProperty("jdbc.username"));
-		basicDataSource.setPassword(env.getProperty("jdbc.password"));
-		basicDataSource.setInitialSize(env.getProperty("jdbc.initialSize", Integer.class));
-		basicDataSource.setMaxActive(env.getProperty("jdbc.initialSize", Integer.class));
+	public DataSource dataSource() {
+		BasicDataSource dataSource = new BasicDataSource();
 		
-		return basicDataSource;
+		dataSource.setDriverClassName(env.getProperty("jdbc.diriverClassName"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.username"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
+		dataSource.setInitialSize(env.getProperty("jdbc.initialSize", Integer.class));
+		dataSource.setMaxActive(env.getProperty("jdbc.initialSize", Integer.class));
+		
+		return dataSource;
 	}
 	
 	@Bean
 	public PlatformTransactionManager transactionManager( DataSource dataSource ) {
-		return new DataSourceTransactionManager(dataSource);
+		return new DataSourceTransactionManager( dataSource );
 	}
 }
