@@ -14,12 +14,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:com/example/pjmall/backend/config/app/properties/jdbc.properties")
+@PropertySource("classpath:com/example/pjmall/backend/config/app/properties/jdbc.properties") // DataSource 설정 프로퍼티즈 파일 위치
 public class DBConfig {
 	
 	@Autowired
 	private Environment env;
 	
+	// DataSource 설정하는 곳
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();

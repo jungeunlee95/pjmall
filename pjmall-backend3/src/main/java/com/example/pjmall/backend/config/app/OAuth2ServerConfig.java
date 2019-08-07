@@ -50,7 +50,7 @@ public class OAuth2ServerConfig {
 	    private AuthenticationManager authenticationManager;
 
 		@Autowired
-		private DataSource dataSource;
+		private DataSource dataSource; // DataSource
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -78,10 +78,11 @@ public class OAuth2ServerConfig {
 //				.jdbc(dataSource);
 		}
 		
+		// DataSource
 	    @Override
 	    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 	        endpoints
-	        	.tokenStore( new JdbcTokenStore(dataSource))
+	        	.tokenStore(new JdbcTokenStore(dataSource))
 	        		.authenticationManager(authenticationManager);
 	    }
 	}	
