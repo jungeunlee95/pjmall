@@ -50,7 +50,7 @@ public class OAuth2ServerConfig {
 	public static class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 		
 	    @Autowired
-		@Qualifier("authenticationManagerBean")		    
+//		@Qualifier("authenticationManagerBean")		    
 	    private AuthenticationManager authenticationManager;
 	    
 		@Override

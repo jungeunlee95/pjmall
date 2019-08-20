@@ -21,8 +21,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.example.pjmall.backend.dto.JSONResult;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
